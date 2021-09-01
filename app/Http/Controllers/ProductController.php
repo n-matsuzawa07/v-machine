@@ -140,61 +140,29 @@ class ProductController extends Controller
       }else{
           $path[1] = null;
       }
-    //   dd($path);
-    //   Product::create($inputs);
-
-        //     $products = new Product;
-        // $products->fill([
-        //     'product_name' => $inputs['product_name'],
-        //     'company_id' => $inputs['company_id'],
-        //     'price' => $inputs['price'],
-        //     'stock' => $inputs['stock'],
-        //     'comment' => $inputs['comment'],
-        //     'image' => $path[1]
-        // ]);
-        // dd($products);
-        // $products->save();
 
     //   商品を登録
       \DB::beginTransaction();
-      try{
-
-    // $company = Company::where('company_name', $inputs['company_name'])->firstOrFail();
-
-    // $product = $company->products()->create([
-    //     'product_name' => $inputs['product_name'],
-    //     'price' => $inputs['price'],
-    //     'stock' => $inputs['stock'],
-    //     'comment' => $inputs['comment'],
-    //     'image' => $path[1]
-    //     ]);
-
+      try{    
+    //メーカー名を取得
+    $maker_name = $request->input('company_id');
+    //メーカー名（company_name）からCompanyモデルのidと紐づける
+    $input_company_id = DB::table('products')->join('companies', 'products.company_id', '=', 'companies.id')->where('company_name', $maker_name)->value('company_id');
+        
         $products = new Product;
         $products->fill([
             'product_name' => $inputs['product_name'],
-            'company_id' => $inputs['company_id'],
+            'company_id' => $input_company_id,
             'price' => $inputs['price'],
             'stock' => $inputs['stock'],
             'comment' => $inputs['comment'],
             'image' => $path[1]
         ]);
 
-        //メーカー名を取得
-        $maker_name = $request->input('company_id');
-        // dd($maker_name);
-        //メーカー名（company_name）からCompanyモデルのidと紐づける
-        $test = DB::table('products')->join('companies', 'products.company_id', '=', 'companies.id')->select('companies.company_name')->get();
-
-        if(isset($maker_name) && $test === $maker_name){
-            //comaniesテーブルから$maker_nameと一致するid取得して、そのidを$products->fillの方で登録
-
-        }
-        dd($test);
-
         $products->save();
-        // dd($product);
-      \DB::commit();
-      }catch(\Throwable $e){
+
+        \DB::commit();
+    }catch(\Throwable $e){
         \DB::rollback();
         // abort(500);
         // $e->getMessage();
