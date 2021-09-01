@@ -179,9 +179,17 @@ class ProductController extends Controller
             'image' => $path[1]
         ]);
 
+        //メーカー名を取得
         $maker_name = $request->input('company_id');
+        // dd($maker_name);
+        //メーカー名（company_name）からCompanyモデルのidと紐づける
+        $test = DB::table('products')->join('companies', 'products.company_id', '=', 'companies.id')->select('companies.company_name')->get();
 
-        dd($maker_name);
+        if(isset($maker_name) && $test === $maker_name){
+            //comaniesテーブルから$maker_nameと一致するid取得して、そのidを$products->fillの方で登録
+
+        }
+        dd($test);
 
         $products->save();
         // dd($product);
