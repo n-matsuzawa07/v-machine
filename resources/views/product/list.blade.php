@@ -54,7 +54,7 @@
         <td>{{ $product->product_name }}</td>
         <td>{{ $product->price }}</td>
         <td>{{ $product->stock }}</td>
-        <td>{{ $product->company_id}}</td>
+        <td>{{ $product->companies->company_name}}</td>
         <td><button type="button"><a class="text-dark" href="/product/{{ $product->id }}">詳細</a></button></td>
         <form action="{{route('delete', $product->id)}}" method="POST" onSubmit="return checkDelete()">
           @csrf
