@@ -20,7 +20,7 @@
       </tr>
       <tr>
         <th>メーカー</th>
-        {{-- <td>{{$product->companies->company_name}}</td> --}}
+        <td>{{$product->companies->company_name}}</td>
       </tr>
       <tr>
         <th>価格</th>
