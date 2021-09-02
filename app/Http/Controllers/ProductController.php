@@ -90,15 +90,16 @@ class ProductController extends Controller
      */
     public function showDetail($id)
     {
-        $products = Product::with('companies')->get();
+        // $product = Product::with('companies')->get();
+        $product = Product::find($id);
         // dd($products);
 
-        if(is_null($products)){
+        if(is_null($product)){
             \Session::flash('err_msg', 'データがありません');
             return redirect(route('productList'));
         }
         
-        return view('product.detail',compact('products'));
+        return view('product.detail',compact('product'));
     }
 
 

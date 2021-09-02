@@ -3,7 +3,6 @@
 @section('content')
 <div class="row">
   <div class="">
-    @foreach($products as $product)
     <h2 class="">{{ $product->product_name }}</h2>
     <table class="table table-striped table-layout">
       <tr>
@@ -37,7 +36,6 @@
     </table>
     <button type="button"><a href='/product/edit/{{$product->id}}'>編集</a></button>
     <button type=" button"><a href="{{route('productList')}}">戻る</a></button>
-    @endforeach
   </div>
 </div>
 @endsection
