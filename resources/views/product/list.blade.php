@@ -49,7 +49,7 @@
       <tr>
         <td>{{ $product->id }}</td>
         <td class="img-thumbnail">
-          <img src="{{asset('$id->image')}}">
+          <img src="/storage/{{$product->image}}" class="w-25">
         </td>
         <td>{{ $product->product_name }}</td>
         <td>{{ $product->price }}</td>

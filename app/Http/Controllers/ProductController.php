@@ -128,11 +128,9 @@ class ProductController extends Controller
     {
       //商品のデータを受け取る
       $inputs = $request->all();
-    //   dd($inputs);
-
-    //YouTubeのやつ
-    $image = $request->file('image');
-    // dd($image);
+      //YouTubeのやつ
+      $image = $request->file('image');
+    //   dd($image);
 
       //画像がアップロードされていればstorageに保存
       if($request->hasfile('image')){
@@ -175,6 +173,8 @@ class ProductController extends Controller
       return redirect(route('productList'));
     }
 
+
+
     /**
      * 商品編集フォームを表示する
      * param int $id
@@ -211,7 +211,7 @@ class ProductController extends Controller
       \DB::beginTransaction();
       try{
       //商品情報を編集
-      $product = Product::find($inputs ['id']);
+      $product = Product::find($inputs['id']);
       $product->fill([
           'product_name' => $inputs['product_name'],
           'company' => $inputs['company'],

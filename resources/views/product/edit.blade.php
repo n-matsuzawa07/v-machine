@@ -16,7 +16,8 @@
       <table class="table table-striped table-layout">
         <tr>
           <th>商品情報ID</th>
-          <td><input type="text" name="product_id" value="{{$product->id}}"></td>
+          {{-- <td><input type="text" name="product_id" value="{{$product->id}}" readonly></td> --}}
+          <td><p>{{$product->id}}</p></td>
         </tr>
         <tr>
           <th>商品名</th>
