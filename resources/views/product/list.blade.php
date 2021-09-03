@@ -48,8 +48,8 @@
       @foreach($products as $product)
       <tr>
         <td>{{ $product->id }}</td>
-        <td class="img-thumbnail">
-          <img src="/storage/{{$product->image}}" class="w-25">
+        <td class="" style="text-align:center">
+          <img src="/storage/{{$product->image}}" class="" style="height:100px">
         </td>
         <td>{{ $product->product_name }}</td>
         <td>{{ $product->price }}</td>

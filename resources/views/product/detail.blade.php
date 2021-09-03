@@ -11,7 +11,7 @@
       </tr>
       <tr>
         <th>商品画像</th>
-        <td></td>
+        <td style="text-align:center"><img src="/storage/{{$product->image}}" class="" style="height:100px"></td>
       </tr>
       <tr>
         <th>商品名</th>
