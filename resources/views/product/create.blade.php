@@ -22,6 +22,7 @@
           <th>メーカー</th>
           <td>
             <select name="company_id">
+              <option value="desabled" style="display:none">選択してください</option>
               @foreach($companies as $company)
               <option>{{ $company->company_name }}</option>
               @endforeach

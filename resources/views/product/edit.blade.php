@@ -27,8 +27,9 @@
           <th>メーカー</th>
           <td>
             <select name="company">
+              <option value="desabled" style="display:none">{{$product->companies->company_name}}</option>
               @foreach($companies as $company)
-              <option value="">{{ $company->company_name }}</option>
+              <option>{{ $company->company_name }}</option>
               @endforeach
             </select>
           </td>
@@ -47,7 +48,11 @@
         </tr>
         <tr>
           <th>商品画像</th>
-          <td></td>
+          <td>
+            <input type="file" name="image" id="image" value="{{$product->image}}" accept="image/png, image/jpeg, image/jpg, image/gif"
+              class="form-control-file">
+            <img src="/storage/{{$product->image}}" class="" style="height:100px">
+          </td>
         </tr>
       </table>
       <button type="submit">更新</button>

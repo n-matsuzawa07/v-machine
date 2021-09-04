@@ -157,9 +157,7 @@ class ProductController extends Controller
             'comment' => $inputs['comment'],
             'image' => $path[1]
         ]);
-
         $products->save();
-
         \DB::commit();
     }catch(\Throwable $e){
         \DB::rollback();
@@ -202,34 +200,80 @@ class ProductController extends Controller
      * 
      * @return view
      */
-    public function exeUpdate(ProductRequest $request)
+    public function exeUpdate(Request $request)
     {
       //商品のデータを受け取る
       $inputs = $request->all();
+    //   dd($inputs);
+      //YouTubeのやつ
+      $image = $request->file('image');
+    //   dd($image);
 
-      //商品を編集
-      \DB::beginTransaction();
-      try{
-      //商品情報を編集
-      $product = Product::find($inputs['id']);
-      $product->fill([
-          'product_name' => $inputs['product_name'],
-          'company' => $inputs['company'],
-          'price' => $inputs['price'],
-          'stock' => $inputs['stock'],
-          'comment' => $inputs['comment'],
-      ]);
-      $product->save();
-
-      \DB::commit();
-      }catch(\Throwable $e){
-        \DB::rollback();
-        $e->getMessage();
+      //画像がアップロードされていればstorageに保存
+      if($request->hasfile('image')){
+          $path = \Storage::put('/public', $image);
+          $path = explode('/', $path);
+      }else{
+          $path[1] = null;
       }
+
+    //   商品を登録
+      \DB::beginTransaction();
+      try{    
+    // //メーカー名を取得
+    // $maker_name = $request->input('company_id');
+    // //メーカー名（company_name）からCompanyモデルのidと紐づける
+    // $input_company_id = DB::table('products')->join('companies', 'products.company_id', '=', 'companies.id')->where('company_name', $maker_name)->value('company_id');
+        
+        $product = Product::find($inputs['id']);
+        $product->fill([
+            'product_name' => $inputs['product_name'],
+            // 'company_id' => $input_company_id,
+            'price' => $inputs['price'],
+            'stock' => $inputs['stock'],
+            'comment' => $inputs['comment'],
+            'image' => $path[1]
+        ]);
+        $product->save();
+        \DB::commit();
+    }catch(\Throwable $e){
+        \DB::rollback();
+        // abort(500);
+        // $e->getMessage();
+        \Log::error($e);
+        throw $e;
+      }
+        //   dd($products);
+      \Session::flash('err_msg', '商品を更新しました');
+      return redirect(route('productList'));
+
+
+    //   //商品のデータを受け取る
+    //   $inputs = $request->all();
+
+    //   //商品を編集
+    //   \DB::beginTransaction();
+    //   try{
+    //   //商品情報を編集
+    //   $product = Product::find($inputs['id']);
+    //   $product->fill([
+    //       'product_name' => $inputs['product_name'],
+    //       'company' => $inputs['company'],
+    //       'price' => $inputs['price'],
+    //       'stock' => $inputs['stock'],
+    //       'comment' => $inputs['comment'],
+    //   ]);
+    //   $product->save();
+
+    //   \DB::commit();
+    //   }catch(\Throwable $e){
+    //     \DB::rollback();
+    //     $e->getMessage();
+    //   }
       
-      \Session::flash('err_msg', '商品を編集しました');
+    //   \Session::flash('err_msg', '商品を更新しました');
     //   return redirect(route('edit',['product' => $product]));
-        return view('product.edit',['product' => $product]);
+    //     // return view('product.edit',['product' => $product]);
     }
 
     /**
