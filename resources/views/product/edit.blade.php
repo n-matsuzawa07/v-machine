@@ -26,9 +26,14 @@
           <th>メーカー</th>
           <td>
             <select name="company">
-              <option value="desabled" style="display:none">{{$product->companies->company_name}}</option>
+              <option value="{{$product->companies->company_name}}" style="display:none">{{$product->companies->company_name}}</option>
               @foreach($companies as $company)
-              <option>{{ $company->company_name }}</option>
+              {{-- @if($product->companies->company_name === $company->company_name){
+                <option>{{ $company->company_name }}</option> --}}
+              {{-- }else{ --}}
+                <option>{{ $company->company_name }}</option>
+              {{-- }
+              @endif --}}
               @endforeach
             </select>
           </td>
