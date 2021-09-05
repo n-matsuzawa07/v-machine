@@ -207,7 +207,7 @@ class ProductController extends Controller
     {
       //商品のデータを受け取る
       $inputs = $request->all();
-      dd($inputs);
+    //   dd($inputs);
       //YouTubeのやつ
       $image = $request->file('image');
     //   dd($image);

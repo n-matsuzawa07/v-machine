@@ -9,7 +9,7 @@
       {{session('err_msg')}}
     </p>
     @endif
-    <form action="{{route('update')}}" method="POST" onSubmit="return checkSubmit()">
+    <form action="{{route('update')}}" method="POST" onSubmit="return checkSubmit()" enctype="multipart/form-data">
       @csrf
       <input type="hidden" name="id" value="{{$product->id}}">
       <table class="table table-striped table-layout">
@@ -25,15 +25,10 @@
         <tr>
           <th>メーカー</th>
           <td>
-            <select name="company">
+            <select name="company_id">
               <option value="{{$product->companies->company_name}}" style="display:none">{{$product->companies->company_name}}</option>
               @foreach($companies as $company)
-              {{-- @if($product->companies->company_name === $company->company_name){
-                <option>{{ $company->company_name }}</option> --}}
-              {{-- }else{ --}}
                 <option>{{ $company->company_name }}</option>
-              {{-- }
-              @endif --}}
               @endforeach
             </select>
           </td>
