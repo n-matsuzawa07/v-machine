@@ -128,6 +128,7 @@ class ProductController extends Controller
     {
       //商品のデータを受け取る
       $inputs = $request->all();
+    //   dd($inputs);
       //YouTubeのやつ
       $image = $request->file('image');
     //   dd($image);
@@ -145,8 +146,10 @@ class ProductController extends Controller
       try{    
     //メーカー名を取得
     $maker_name = $request->input('company_id');
+    // dd($maker_name);
     //メーカー名（company_name）からCompanyモデルのidと紐づける
     $input_company_id = DB::table('products')->join('companies', 'products.company_id', '=', 'companies.id')->where('company_name', $maker_name)->value('company_id');
+    dd($input_company_id);
         
         $products = new Product;
         $products->fill([
@@ -204,7 +207,7 @@ class ProductController extends Controller
     {
       //商品のデータを受け取る
       $inputs = $request->all();
-    //   dd($inputs);
+      dd($inputs);
       //YouTubeのやつ
       $image = $request->file('image');
     //   dd($image);
@@ -216,19 +219,20 @@ class ProductController extends Controller
       }else{
           $path[1] = null;
       }
+    //   dd($path);
 
     //   商品を登録
       \DB::beginTransaction();
       try{    
-    // //メーカー名を取得
-    // $maker_name = $request->input('company_id');
-    // //メーカー名（company_name）からCompanyモデルのidと紐づける
-    // $input_company_id = DB::table('products')->join('companies', 'products.company_id', '=', 'companies.id')->where('company_name', $maker_name)->value('company_id');
+    //メーカー名を取得
+    $maker_name = $request->input('company_id');
+    // メーカー名（company_name）からCompanyモデルのidと紐づける
+    $input_company_id = DB::table('products')->join('companies', 'products.company_id', '=', 'companies.id')->where('company_name', $maker_name)->value('company_id');
         
         $product = Product::find($inputs['id']);
         $product->fill([
             'product_name' => $inputs['product_name'],
-            // 'company_id' => $input_company_id,
+            'company_id' => $input_company_id,
             'price' => $inputs['price'],
             'stock' => $inputs['stock'],
             'comment' => $inputs['comment'],

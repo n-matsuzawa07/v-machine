@@ -3,7 +3,6 @@
 @section('content')
 <div class="row">
   <div class="">
-
     <h2 class="">商品編集</h2>
     @if(session('err_msg'))
     <p class="text-danger">
