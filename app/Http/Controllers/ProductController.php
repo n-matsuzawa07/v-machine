@@ -265,7 +265,10 @@ class ProductController extends Controller
             return redirect(route('productList'));
         }
 
-        $delImage = Product::find($id);
+        $product = Product::find($id);
+        $delName = $product->image;
+        $pathdel = storage_path() .'/app/public/'. $delName;
+        \File::delete($pathdel);
 
         try{
             //商品を削除
