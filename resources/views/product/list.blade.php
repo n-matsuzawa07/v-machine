@@ -24,7 +24,7 @@
       <input type="text" name="keyword" value='{{$keyword}}'>
       <span>メーカー</span>
       <select class="" name="keyword2">
-        <option value="desabled" style="display:none">選択してください</option>
+        <option style="display:none">選択してください</option>
         @foreach($companies as $company)
         <option value="">{{ $company->company_name }}</option>
         @endforeach
