@@ -211,7 +211,6 @@ class ProductController extends Controller
       //YouTubeのやつ
       $image = $request->file('image');
     //   dd($image);
-
       //画像がアップロードされていればstorageに保存
       if($request->hasfile('image')){
           $path = \Storage::put('/public', $image);
@@ -219,9 +218,8 @@ class ProductController extends Controller
       }else{
           $path[1] = null;
       }
-    //   dd($path);
-
-    //   商品を登録
+      
+    //   商品を更新
       \DB::beginTransaction();
       try{    
     //メーカー名を取得
@@ -238,6 +236,7 @@ class ProductController extends Controller
             'comment' => $inputs['comment'],
             'image' => $path[1]
         ]);
+        // dd($path);
         $product->save();
         \DB::commit();
     }catch(\Throwable $e){
@@ -250,34 +249,6 @@ class ProductController extends Controller
         //   dd($products);
       \Session::flash('err_msg', '商品を更新しました');
       return redirect(route('productList'));
-
-
-    //   //商品のデータを受け取る
-    //   $inputs = $request->all();
-
-    //   //商品を編集
-    //   \DB::beginTransaction();
-    //   try{
-    //   //商品情報を編集
-    //   $product = Product::find($inputs['id']);
-    //   $product->fill([
-    //       'product_name' => $inputs['product_name'],
-    //       'company' => $inputs['company'],
-    //       'price' => $inputs['price'],
-    //       'stock' => $inputs['stock'],
-    //       'comment' => $inputs['comment'],
-    //   ]);
-    //   $product->save();
-
-    //   \DB::commit();
-    //   }catch(\Throwable $e){
-    //     \DB::rollback();
-    //     $e->getMessage();
-    //   }
-      
-    //   \Session::flash('err_msg', '商品を更新しました');
-    //   return redirect(route('edit',['product' => $product]));
-    //     // return view('product.edit',['product' => $product]);
     }
 
     /**
