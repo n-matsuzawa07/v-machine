@@ -32,7 +32,7 @@
       <span class=""><input type="submit" value="検索"></span>
     </form>
 
-    <span><button class="d-block float-right"><a class="text-dark" href="{{route('create')}}">新規登録</a></button></span>
+    <span class="d-block float-right"><button ><a class="text-dark" href="{{route('create')}}">新規登録</a></button></span>
 
     <table class="table table-striped">
       <tr>
@@ -66,7 +66,7 @@
   </div>
 </div>
 <script>
-function checkDelete() {
+function checkDelete() {onSubmit="return checkSubmit()"
   if (window.confirm('削除してもよろしいですか？')) {
     return true;
   } else {

@@ -146,11 +146,13 @@ class ProductController extends Controller
       try{    
     //メーカー名を取得
     $maker_name = $request->input('company_id');
-    // dd($maker_name);
+
     //メーカー名（company_name）からCompanyモデルのidと紐づける
-    $input_company_id = DB::table('products')->join('companies', 'products.company_id', '=', 'companies.id')->where('company_name', $maker_name)->value('company_id');
-    dd($input_company_id);
-        
+    $input_company_id = DB::table('companies')
+    ->where('company_name', $maker_name)
+    ->value('id');
+
+    // dd($input_company_id);
         $products = new Product;
         $products->fill([
             'product_name' => $inputs['product_name'],
@@ -263,7 +265,7 @@ class ProductController extends Controller
             return redirect(route('productList'));
         }
 
-        $delImage = Product::find;
+        $delImage = Product::find($id);
 
         try{
             //商品を削除
