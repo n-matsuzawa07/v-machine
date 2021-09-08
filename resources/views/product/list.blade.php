@@ -24,9 +24,9 @@
       <input type="text" name="keyword" value='{{$keyword}}'>
       <span>メーカー</span>
       <select class="" name="keyword2">
-        <option style="display:none">選択してください</option>
+        <option style="display:none" selected>選択してください</option>
         @foreach($companies as $company)
-        <option value="">{{ $company->company_name }}</option>
+        <option value="{{$company->company_name}}">{{ $company->company_name }}</option>
         @endforeach
       </select>
       <span class=""><input type="submit" value="検索"></span>

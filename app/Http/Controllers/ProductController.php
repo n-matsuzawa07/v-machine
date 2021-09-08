@@ -34,15 +34,25 @@ class ProductController extends Controller
         $keyword = $request->input('keyword');
         $keyword2 = $request->input('keyword2');
         $query = Product::query();
+        $query2 = Company::query();
+
+        $query_company_name = DB::table('companies')->select('company_name')->join('products','products.company_id','=','companies.id')->get();
+        // dd($query_company_name);
 
         if(!empty($keyword)){
-            $query->where('product_name','LIKE','%'.$keyword.'%');
+            $query->where('product_name','LIKE','%'.$keyword.'%')->get();
         }
+        //リレーションさせる
+        // if(!empty($keyword2) && $keyword2 != ('選択してください')){
+        //     $query2->where($query_company_name, 'LIKE', $keyword2)->get();
+        // }
+        //keyword2を文字ではなく数字を引っ張ってくるように変換する
         if(!empty($keyword2) && $keyword2 != ('選択してください')){
-            $query->where('company_name', 'LIKE', $keyword2);
+            $query->where('company_id', 'LIKE', $keyword2)->get();
         }
 
         $products = $query->get();
+        // dd($products);
         //ただ全件引っ張るだけなら下記でOK
         // $products = Product::all();
         // dd($products);
