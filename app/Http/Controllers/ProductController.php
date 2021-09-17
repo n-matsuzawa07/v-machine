@@ -36,8 +36,7 @@ class ProductController extends Controller
         $query = Product::query();
         $query2 = Company::query();
 
-        $query_company_name = DB::table('companies')->select('company_name')->join('products','products.company_id','=','companies.id')->get();
-        // dd($query_company_name);
+        $query_company_name = DB::table('companies')->select('company_name')->join('products','products.company_id','=','companies.id')->get();        // dd($query_company_name);
 
         if(!empty($keyword)){
             $query->where('product_name','LIKE','%'.$keyword.'%')->get();
@@ -52,6 +51,8 @@ class ProductController extends Controller
         }
 
         $products = $query->get();
+        $makers = $query->get();
+                // dd($makers);
         // dd($products);
         //ただ全件引っ張るだけなら下記でOK
         // $products = Product::all();
@@ -141,7 +142,7 @@ class ProductController extends Controller
     //   dd($inputs);
       //YouTubeのやつ
       $image = $request->file('image');
-    //   dd($image);
+      // dd($image);
 
       //画像がアップロードされていればstorageに保存
       if($request->hasfile('image')){

@@ -26,7 +26,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/product/list', 'ProductController@showList')->name('productList');
 
 //検索機能
-// Route::get('/product/list', 'ProductController@search')->name('search');
+// Route::get('/product/list', 'ProductController@searchList')->name('searchList');
 
 //ログイン
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
@@ -37,29 +37,6 @@ Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
 Route::post('register', 'Auth\RegisterController@register');
 
-// // ログイン画面を表示
-// Route::get('/', 'AuthController@showLogin')->name('showLogin');
-
-// //ログインの処理
-// Route::post('product/list', 'AuthController@login')->name('login');
-
-// //ログイン後の画面遷移 → 商品一覧へ
-// Route::get('/product/list', 
-// function(){
-//   return view('product.list');
-// }
-// )->name('afterLogin');
-
-
-// //ユーザー新規登録画面を表示
-// Route::get('/login/userCreate', 'AuthController@showUserCreate')->name('showUserCreate');
-
-// //ユーザー新規登録の処理
-// Route::post('/login/userStore', 'AuthController@exeUserStore')->name('exeUserStore');
-
-// //商品一覧画面を表示
-// Route::get('/product/list', 'ProductController@showList')->name('products');
-
 //商品新規登録画面を表示
 Route::get('/product/create', 'ProductController@showCreate')->name('create');
 
@@ -69,8 +46,6 @@ Route::post('/product/list', 'ProductController@exeStore')->name('store');
 
 //商品詳細画面を表示
 Route::get('/product/{id}', 'ProductController@showDetail')->name('detail');
-
-
 
 
 //商品編集画面を表示
