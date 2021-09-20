@@ -23,7 +23,7 @@
       <span>商品名</span>
       <input type="text" name="keyword" value='{{$keyword}}'>
       <span>メーカー</span>
-      <select class="" name="keyword2">
+      <select name="keyword2">
         <option style="display:none" selected>選択してください</option>
         @foreach($companies as $company)
         {{-- <option value="{{$company->products->company_id}}"> --}}
@@ -31,6 +31,14 @@
           {{ $company->company_name }}
         </option>
         @endforeach
+        {{-- @foreach($products as $product)
+        <option value="{{$product->company_id}}">
+        <option value="{{$product->companies->id}}">
+          {{ $product->companies->company_name }}
+        </option>
+        @endforeach --}}
+
+        
       </select>
       <span class=""><input type="submit" value="検索"></span>
     </form>
