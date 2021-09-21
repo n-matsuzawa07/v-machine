@@ -19,23 +19,15 @@ class ProductController extends Controller
      */
     public function showList(Request $request)
     {
-        // $makers = DB::table('products')
-        //         ->join('companies','companies.company.id','=','products.company_id');
-
         //メーカーをDBから引っ張る
         $companies = DB::table('companies')
                 ->select('companies.company_name')
                 ->get();
 
-        // $companies = Company::find($id);
-        // $products = $companies->company_name;
-
         //検索ワードをDBから引っ張る
         $keyword = $request->input('keyword');
         $keyword2 = $request->keyword2;
         $query = Product::query();
-
-        // dd($keyword);
 
         $query_company_name = DB::table('companies')->select('company_name')->join('products','products.company_id','=','companies.id')->get();
 
@@ -52,12 +44,6 @@ class ProductController extends Controller
         }
 
         $products = $query->get();
-        // dd($products);
-                // dd($makers);
-        // dd($products);
-        //ただ全件引っ張るだけなら下記でOK
-        // $products = Product::all();
-        // dd($products);
 
         return view('product.list',compact('companies','products','keyword'));
     }
@@ -143,7 +129,7 @@ class ProductController extends Controller
     //   dd($inputs);
       //YouTubeのやつ
       $image = $request->file('image');
-      // dd($image);
+    //   dd($image);
 
       //画像がアップロードされていればstorageに保存
       if($request->hasfile('image')){

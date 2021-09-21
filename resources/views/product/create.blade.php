@@ -63,13 +63,6 @@
           <td>
             <input type="file" name="image" id="image" accept="image/png, image/jpeg, image/jpg, image/gif"
               class="form-control-file">
-
-            <!-- 画像だけを一度アップロードするパターン -->
-            <!-- <form method="POST" action="/product/create" enctype="multipart/form-data">
-              <input type="file" name="image" class="form-control-file">
-              <button type="submit" class="btn btn-primary mt-2">アップロード</button>
-            </form> -->
-
           </td>
         </tr>
       </table>
