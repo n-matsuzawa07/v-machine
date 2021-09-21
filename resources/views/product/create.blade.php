@@ -4,7 +4,7 @@
 <div class="row">
   <div class="">
     <h2 class="">商品新規登録</h2>
-    <form action="{{route('store')}}" method="POST" onSubmit="return checkSubmit()"　enctype="multipart/form-data">
+    <form action="{{route('store')}}" method="POST" onSubmit="return checkSubmit()"enctype="multipart/form-data">
       @csrf
       <table class="table table-striped table-layout">
         <tr>

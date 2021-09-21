@@ -47,38 +47,6 @@ class ProductController extends Controller
 
         return view('product.list',compact('companies','products','keyword'));
     }
-
-
-    /**
-     * 検索機能実装する
-     * 
-     * @return view
-     */
-    // public function search(Request $request)
-    // {
-
-    //     //検索ワードをDBから引っ張る
-    //     $keyword = $request->input('keyword');
-    //     $query = Product::query();
-
-    //     if(!empty($keyword)){
-    //         $query->where('product_name','LIKE','%'.$keyword.'%');
-    //     }
-
-
-        // return view('product.list',[keyword => $keyword]);
-
-
-    //    $searches = Post::orderBy('created_at','asc')
-    //              ->where(function($query){
-    //                  //
-    //                 if($search = request('search')){
-    //                     $query->where('title','LIKE',"%{$search}%")->orWhere()
-    //                 }
-    //              })
-
-        // $products = Product::all();
-        // return view('product.list',['products' => $products],['companies' => $companies]);
     
 
     /**
@@ -126,10 +94,10 @@ class ProductController extends Controller
     {
       //商品のデータを受け取る
       $inputs = $request->all();
-    //   dd($inputs);
+      // dd($inputs);
       //YouTubeのやつ
       $image = $request->file('image');
-    //   dd($image);
+      // dd($image);
 
       //画像がアップロードされていればstorageに保存
       if($request->hasfile('image')){
@@ -207,10 +175,10 @@ class ProductController extends Controller
     {
       //商品のデータを受け取る
       $inputs = $request->all();
-    //   dd($inputs);
+      // dd($inputs);
       //YouTubeのやつ
       $image = $request->file('image');
-    //   dd($image);
+      // dd($image);
       //画像がアップロードされていればstorageに保存
       if($request->hasfile('image')){
           $path = \Storage::put('/public', $image);
