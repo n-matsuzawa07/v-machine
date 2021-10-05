@@ -7,6 +7,7 @@ use App\Company;
 use App\Product;
 use App\Http\Requests\ProductRequest;
 use Illuminate\Support\Facades\DB;
+use App\Rules\alpha_num_check;
 
 
 
@@ -43,7 +44,7 @@ class ProductController extends Controller
             $query->where('company_id', 'LIKE', $keyword2Id)->get();
         }
 
-        $products = $query->get();
+        $products = $query->sortable()->paginate(5);
 
         return view('product.list',compact('companies','products','keyword'));
     }
@@ -139,7 +140,7 @@ class ProductController extends Controller
       }
         //   dd($products);
       \Session::flash('err_msg', '商品を登録しました');
-      return redirect(route('productList'));
+      return redirect(route('create'));
     }
 
 
@@ -246,5 +247,13 @@ class ProductController extends Controller
         \Session::flash('err_msg', '削除しました。');
         return redirect(route('productList'));
     }
+
     
+    protected function validator(array $data)
+{
+     return Validator::make($data, [
+         'price' => [new alpha_num_check()], 
+         'stock' => [new alpha_num_check()], 
+     ]);
+}
 }

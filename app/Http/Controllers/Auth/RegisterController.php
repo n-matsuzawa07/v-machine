@@ -8,6 +8,7 @@ use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use App\Rules\alpha_num_check;
 
 class RegisterController extends Controller
 {
@@ -51,8 +52,9 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'email' => ['required', new alpha_num_check, 'email', 'max:255', 'unique:users'],
+            //stringをnew alpha_num_checkに書き換えている
+            'password' => ['required', new alpha_num_check, 'min:8', 'confirmed'],
         ]);
     }
 

@@ -1,9 +1,13 @@
 @extends('layout')
 @section('title','商品新規登録')
 @section('content')
-<div class="row">
-  <div class="">
+  <div>
     <h2 class="">商品新規登録</h2>
+        @if(session('err_msg'))
+    <p class="text-danger">
+      {{session('err_msg')}}
+    </p>
+    @endif
     <form action="{{route('store')}}" method="POST" onSubmit="return checkSubmit()"enctype="multipart/form-data">
       @csrf
       <table class="table table-striped table-layout">
@@ -66,11 +70,10 @@
           </td>
         </tr>
       </table>
-      <button type="submit">登録</button>
-      <button type="button"><a href="{{route('productList')}}">戻る</a></button>
+      <button type="submit" class="btn btn-primary">登録</button>
+      <button type="button" onclick="location.href='{{route('productList')}}'" class="btn btn-outline-primary ml-3">戻る</button>
     </form>
   </div>
-</div>
 <script>
 function checkSubmit() {onSubmit="return checkSubmit()"
   if (window.confirm('登録してもよろしいですか？')) {

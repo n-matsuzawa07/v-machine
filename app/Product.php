@@ -3,9 +3,11 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Kyslik\ColumnSortable\Sortable;
 
 class Product extends Model
 {
+    use Sortable;
     //テーブル名
     protected $table = 'products';
 
@@ -20,6 +22,16 @@ class Product extends Model
         'image',
         'create_at',
         'updated_at'
+    ];
+
+    //ソートに使うカラムを追加
+    public $sortable = [
+        'id',
+        'company_id',
+        'product_name',
+        'price',
+        'stock',
+        'image',
     ];
 
     public function companies(){

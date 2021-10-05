@@ -1,7 +1,6 @@
 @extends('layout')
 @section('title','商品編集')
 @section('content')
-<div class="row">
   <div class="">
     <h2 class="">{{ $product->product_name }}</h2>
     <table class="table table-striped table-layout">
@@ -34,8 +33,7 @@
         <td>{{$product->comment}}</td>
       </tr>
     </table>
-    <button type="button"><a href='/product/edit/{{$product->id}}'>編集</a></button>
-    <button type=" button"><a href="{{route('productList')}}">戻る</a></button>
+    <button class="btn btn-primary" type="button" onclick="location.href='/product/edit/{{$product->id}}'">編集</button>
+    <button class="btn btn-outline-primary ml-3" type=" button" onclick="location.href='{{route('productList')}}'">戻る</button>
   </div>
-</div>
 @endsection

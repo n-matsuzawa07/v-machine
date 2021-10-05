@@ -16,8 +16,10 @@
 
 <body>
 
-  <div class="container">
-    @yield('content')
+  <div class="container col-lg-10 col-sm-10 text-center">
+    <div class="row">
+      @yield('content')
+    </div>
   </div>
   <footer class="footer bg-dark fixed-bottom">
     @include('footer')

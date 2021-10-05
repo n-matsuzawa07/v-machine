@@ -1,7 +1,6 @@
 @extends('layout')
 @section('title','商品編集')
 @section('content')
-<div class="row">
   <div class="">
     <h2 class="">商品編集</h2>
     @if(session('err_msg'))
@@ -54,11 +53,10 @@
           </td>
         </tr>
       </table>
-      <button type="submit">更新</button>
-      <button type=" button"><a href="{{route('detail',$product->id)}}">戻る</a></button>
+      <button type="submit" class="btn btn-primary">更新</button>
+      <button type="button" onclick="location.href='{{route('detail',$product->id)}}'" class="btn btn-outline-primary ml-3">戻る</button>
     </form>
   </div>
-</div>
 <script>
 function checkSubmit() {
   if (window.confirm('更新してもよろしいですか？')) {
