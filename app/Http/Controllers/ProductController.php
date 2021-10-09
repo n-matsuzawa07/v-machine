@@ -25,11 +25,18 @@ class ProductController extends Controller
                 ->select('companies.company_name')
                 ->get();
 
-        //検索ワードをDBから引っ張る
+    //検索ワードをDBから引っ張る
+        //入力値を格納
         $keyword = $request->input('keyword');
         $keyword2 = $request->keyword2;
         $price_low = $request->input('price_low');
         $price_high = $request->input('price_high');
+        $hidden_price_low = $request->input('hidden_price_low');
+        $hidden_price_high = $request->input('hidden_price_high');
+        $stock_low = $request->input('stock_low');
+        $stock_high = $request->input('stock_high');
+        $hidden_stock_low = $request->input('hidden_stock_low');
+        $hidden_stock_high = $request->input('hidden_stock_high');
         // dd($price_high);
         $query = Product::query();
 
@@ -51,11 +58,26 @@ class ProductController extends Controller
         //価格検索
         if(!empty($price_low) && !empty($price_high)){
           $query->whereBetween('price',[$price_low, $price_high])->get();
+        }else if(!empty($price_low)){
+          $query->whereBetween('price',[$price_low, $hidden_price_high])->get();
+        }else if(!empty($price_high)){
+          $query->whereBetween('price',[$hidden_price_low, $price_high])->get();
+        }else{
+          $query->get();
         }
-        // dd($selectedPrice);
-        
-        //在庫検索
 
+        //在庫検索
+        if(!empty($stock_low) && !empty($stock_high)){
+          $query->whereBetween('stock',[$stock_low, $stock_high])->get();
+        }else if(!empty($stock_low)){
+          $query->whereBetween('stock',[$stock_low, $hidden_stock_high])->get();
+        }else if(!empty($stock_high)){
+          $query->whereBetween('stock',[$hidden_stock_low, $stock_high])->get();
+        }else{
+          $query->get();
+        }
+
+        //ページネーション
         $products = $query->sortable()->paginate(5);
 
         return view('product.list',compact('companies','products','keyword'));

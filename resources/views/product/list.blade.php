@@ -31,15 +31,21 @@
       </select>
       <div>
         <span class="font-weight-bold">価格</span>
-        <input type="text" name="price_low" size="10" value="0" class="my-2 ml-2">
+        <input type="text" name="price_low" size="10" class="my-2 ml-2">
         <span>~</span>
-        <input type="text" name="price_high" size="10" value="999999" class="mr-4">
-        
+        <input type="text" name="price_high" size="10" class="mr-4">
+        {{-- hidden要素 --}}
+        <input type="hidden" name="hidden_price_low" size="10" value="0" class="my-2 ml-2">
+        <input type="hidden" name="hidden_price_high" size="10" value="999999" class="mr-4">
+
 
         <span class="font-weight-bold">在庫</span>
         <input type="text" name="stock_low" size="10" class="my-2 ml-2">
         <span>~</span>
         <input type="text" name="stock_high" size="10">
+        {{-- hidden要素 --}}
+        <input type="hidden" name="hidden_stock_low" size="10" value="0" class="my-2 ml-2">
+        <input type="hidden" name="hidden_stock_high" size="10" value="999999" class="mr-4">
       </div>
       <span><input type="submit" value="検索" class="btn btn-primary"></span>
       </form>
