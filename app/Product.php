@@ -37,4 +37,8 @@ class Product extends Model
     public function companies(){
         return $this->belongsTo('App\Company','company_id');
     }    
+
+    // public static function getSelectedPrice($price_low, $price_high){
+    //     $selectedPrice = Product::whereBetween('price',[$price_low, $price_high]);
+    // }
 }

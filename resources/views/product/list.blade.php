@@ -15,7 +15,8 @@
       </ul>
     </div> --}}
     <!--  検索フォーム  -->
-    <form method="GET" action="{{url('/product/list')}}">
+    <div class="">
+      <form method="GET" action="{{url('/product/list')}}">
       @csrf
       <span class="font-weight-bold">商品名</span>
       <input type="text" name="keyword" value='{{$keyword}}' class="my-2 mr-4 ml-2">
@@ -27,21 +28,26 @@
           {{ $company->company_name }}
         </option>
         @endforeach
-        {{-- @foreach($products as $product)
-        <option value="{{$product->company_id}}">
-        <option value="{{$product->companies->id}}">
-          {{ $product->companies->company_name }}
-        </option>
-        @endforeach --}}
-
-        
       </select>
+      <div>
+        <span class="font-weight-bold">価格</span>
+        <input type="text" name="price_low" size="10" value="0" class="my-2 ml-2">
+        <span>~</span>
+        <input type="text" name="price_high" size="10" value="999999" class="mr-4">
+        
+
+        <span class="font-weight-bold">在庫</span>
+        <input type="text" name="stock_low" size="10" class="my-2 ml-2">
+        <span>~</span>
+        <input type="text" name="stock_high" size="10">
+      </div>
       <span><input type="submit" value="検索" class="btn btn-primary"></span>
-    </form>
+      </form>
+    </div>
 
     <span id="test_jquery" class="d-block float-right"><button class="btn btn-primary" onclick="location.href='{{route('create')}}'">新規登録</button></span>
 
-    <table id="sort_table" class="table table-striped">
+    <table id="sort_table" class="table table-striped tablesorter">
       <thead>
         <tr>
           <th>@sortablelink('id','ID')</th>

@@ -28,21 +28,33 @@ class ProductController extends Controller
         //検索ワードをDBから引っ張る
         $keyword = $request->input('keyword');
         $keyword2 = $request->keyword2;
+        $price_low = $request->input('price_low');
+        $price_high = $request->input('price_high');
+        // dd($price_high);
         $query = Product::query();
 
         $query_company_name = DB::table('companies')->select('company_name')->join('products','products.company_id','=','companies.id')->get();
 
-        //キーワード検索
+        //商品名検索
         if(!empty($keyword)){
             $query->where('product_name','LIKE','%'.$keyword.'%')->get();
         }
+        
+        //メーカー検索
         //keyword2を数字に変更する
         $keyword2Id = Company::where('company_name', $keyword2)->value('id');
-
         //keyword2を文字ではなく数字を引っ張ってくるように変換する
         if(!empty($keyword2) && $keyword2 != ('選択してください')){
             $query->where('company_id', 'LIKE', $keyword2Id)->get();
         }
+
+        //価格検索
+        if(!empty($price_low) && !empty($price_high)){
+          $query->whereBetween('price',[$price_low, $price_high])->get();
+        }
+        // dd($selectedPrice);
+        
+        //在庫検索
 
         $products = $query->sortable()->paginate(5);
 
